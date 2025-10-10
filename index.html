@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Ibrahim | Web Designer & Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <style>
+        /* CSS Variables for Themes */
+        :root {
+            --bg: #FBFDFF;
+            --card: #FFFFFF;
+            --text: #0F1724;
+            --muted: #6B7280;
+            --border: #E6EEF5;
+            --accent-1: #2EE6C1;
+            --accent-2: #00C2FF;
+            --danger: #FF4D4F;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --radius: 20px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0B1220;
+            --card: #0F1724;
+            --text: #E6EEF5;
+            --muted: #94A3B8;
+            --border: rgba(255,255,255,0.04);
+            --accent-1: #6C63FF;
+            --accent-2: #00D4FF;
+            --danger: #FF6B6B;
+            --success: #34D399;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="purple"] {
+            --bg: #F6F7FB;
+            --card: #FFFFFF;
+            --text: #0B1220;
+            --muted: #7B7F9E;
+            --accent-1: #6C63FF;
+            --accent-2: #00D4FF;
+            --border: #E6EEF5;
+        }
+
+        [data-theme="minimal"] {
+            --bg: #FFFFFF;
+            --card: #F8FAFC;
+            --text: #1E293B;
+            --muted: #64748B;
+            --accent-1: #6B7280;
+            --accent-2: #9CA3AF;
+            --border: #E2E8F0;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Animation Classes */
+        .anim-slide-up { 
+            transform: translateY(16px); 
+            opacity:0; 
+            animation: slideUp 0.6s cubic-bezier(0.2,0.9,0.2,1) forwards; 
+        }
+        
+        .anim-pop { 
+            transform: scale(0.92); 
+            opacity:0; 
+            animation: popIn 0.35s cubic-bezier(0.2,0.9,0.2,1) forwards; 
+        }
+        
+        .anim-fade { 
+            opacity:0; 
+            transform: translateY(6px); 
+            animation: fadeIn 0.45s forwards; 
+        }
+        
+        .anim-scale-in { 
+            transform: scale(0.96); 
+            opacity:0; 
+            animation: scaleIn 0.28s forwards; 
+        }
+        
+        .anim-toast { 
+            animation: toast 0.45s ease both; 
+        }
+        
+        .anim-staggered { 
+            opacity:0; 
+            transform: translateY(10px); 
+            animation: staggerUp 0.5s forwards; 
+        }
+
+        @keyframes slideUp { 
+            to { transform: translateY(0); opacity:1; } 
+        }
+        
+        @keyframes popIn { 
+            60% { transform: scale(1.06); opacity:1; } 
+            100% { transform: scale(1); } 
+        }
+        
+        @keyframes fadeIn { 
+            to { opacity:1; transform: translateY(0); } 
+        }
+        
+        @keyframes scaleIn { 
+            to { transform: scale(1); opacity:1; } 
+        }
+        
+        @keyframes toast { 
+            0% { transform: translateY(8px); opacity:0; } 
+            60% { transform: translateY(-6px); opacity:1; } 
+            100% { transform: translateY(0); } 
+        }
+        
+        @keyframes staggerUp { 
+            to { opacity:1; transform: translateY(0); } 
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: var(--transition);
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--accent-1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, var(--accent-2) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .control-btn:hover {
+            background: var(--accent-1);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .theme-presets {
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-preset {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .theme-preset:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-preset.active {
+            border-color: var(--text);
+            transform: scale(1.1);
+        }
+
+        .theme-preset.default { background: linear-gradient(135deg, #2EE6C1, #00C2FF); }
+        .theme-preset.dark { background: linear-gradient(135deg, #6C63FF, #00D4FF); }
+        .theme-preset.purple { background: linear-gradient(135deg, #6C63FF, #00D4FF); }
+        .theme-preset.minimal { background: linear-gradient(135deg, #6B7280, #9CA3AF); }
+
+        /* Compact Mode */
+        .compact-mode .profile-img-container,
+        .compact-mode .social-grid {
+            display: none;
+        }
+
+        .compact-mode .profile-card {
+            padding: 20px;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 350px 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Profile Card */
+        .profile-section {
+            grid-column: 1 / -1;
+        }
+
+        @media (min-width: 1024px) {
+            .profile-section {
+                grid-column: 1 / 2;
+            }
+        }
+
+        .profile-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card);
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bio {
+            color: var(--muted);
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .birthday-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .age-display {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title i {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 24px;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-grow: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border-radius: 16px;
+            background: var(--glass);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            opacity: 0.1;
+            transition: width 0.3s ease;
+            z-index: 0;
+        }
+
+        .contact-item:hover::before {
+            width: 100%;
+        }
+
+        .contact-item:hover {
+            transform: translateX(-5px);
+            border-color: var(--accent-1);
+        }
+
+        .contact-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 18px;
+            font-size: 22px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .contact-details {
+            flex: 1;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-type {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        /* Social Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass);
+            color: var(--accent-1);
+            font-size: 24px;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.1);
+            color: white;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        /* Download Section */
+        .download-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sticky-cta.show {
+            display: flex;
+        }
+
+        .sticky-cta:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: modalFadeIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--text);
+        }
+
+        .format-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .format-option {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .format-option:hover {
+            background: var(--card);
+            border-color: var(--accent-1);
+            transform: translateY(-3px);
+        }
+
+        .format-option i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #qrcode {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            z-index: 1001;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Accessibility */
+        .accessibility-toolbar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .accessibility-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .accessibility-btn:hover {
+            background: var(--accent-1);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* High Contrast */
+        .high-contrast {
+            --bg: #000000;
+            --card: #111111;
+            --text: #FFFFFF;
+            --muted: #CCCCCC;
+            --border: #333333;
+        }
+
+        /* Large Text */
+        .large-text {
+            font-size: 18px;
+        }
+
+        .large-text .contact-value {
+            font-size: 18px;
+        }
+
+        .large-text .bio {
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-controls {
+                justify-content: center;
+            }
+            
+            .format-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .accessibility-toolbar {
+                bottom: 80px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-img-container {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .name {
+                font-size: 28px;
+            }
+            
+            .bio {
+                font-size: 16px;
+            }
+            
+            .contact-item {
+                padding: 16px 18px;
+            }
+            
+            .contact-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-left: 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .download-section, .social-grid, .accessibility-toolbar, .sticky-cta {
+                display: none;
+            }
+            
+            .profile-card, .info-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .profile-img {
+                border-color: #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky CTA -->
+    <button class="sticky-cta" id="stickyDownload">
+        <i class="fas fa-download"></i>
+        Download
+    </button>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Download Modal -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content anim-scale-in">
+            <div class="modal-header">
+                <h3>Choose Download Format</h3>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="format-options">
+                <div class="format-option" onclick="downloadVCF()">
+                    <i class="fas fa-address-card"></i>
+                    <div>VCF File</div>
+                    <small>Add to Contacts</small>
+                </div>
+                <div class="format-option" onclick="downloadJSON()">
+                    <i class="fas fa-code"></i>
+                    <div>JSON</div>
+                    <small>For Developers</small>
+                </div>
+                <div class="format-option" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i>
+                    <div>PDF</div>
+                    <small>Printable</small>
+                </div>
+                <div class="format-option" onclick="downloadTXT()">
+                    <i class="fas fa-file-alt"></i>
+                    <div>TXT</div>
+                    <small>Plain Text</small>
+                </div>
+                <div class="format-option" onclick="showQRCode()">
+                    <i class="fas fa-qrcode"></i>
+                    <div>QR Code</div>
+                    <small>Quick Scan</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content anim-scale-in">
+            <div class="modal-header">
+                <h3>QR Code</h3>
+                <button class="close-modal" onclick="closeQRModal()">×</button>
+            </div>
+            <div class="qr-container">
+                <div id="qrcode"></div>
+                <p>Scan this QR code to save my contact</p>
+                <button class="control-btn" onclick="downloadQRCode()">
+                    <i class="fas fa-download"></i>
+                    Download QR Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Toolbar -->
+    <div class="accessibility-toolbar">
+        <button class="accessibility-btn" onclick="toggleHighContrast()" title="High Contrast" aria-label="Toggle high contrast mode">
+            <i class="fas fa-circle"></i>
+        </button>
+        <button class="accessibility-btn" onclick="toggleLargeText()" title="Large Text" aria-label="Toggle large text mode">
+            <i class="fas fa-text-height"></i>
+        </button>
+        <button class="accessibility-btn" onclick="toggleCompactMode()" title="Compact Mode" aria-label="Toggle compact mode">
+            <i class="fas fa-compress"></i>
+        </button>
+        <button class="accessibility-btn" onclick="resetAccessibility()" title="Reset" aria-label="Reset all accessibility settings">
+            <i class="fas fa-redo"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header anim-slide-up">
+            <h1>Mohamed Ibrahim</h1>
+            <div class="header-controls">
+                <button class="control-btn" onclick="openDownloadModal()">
+                    <i class="fas fa-download"></i>
+                    Download Contact
+                </button>
+                <button class="control-btn" onclick="shareProfile()">
+                    <i class="fas fa-share-alt"></i>
+                    Share
+                </button>
+                <div class="theme-presets">
+                    <div class="theme-preset default active" onclick="changeTheme('default')" title="Default Theme"></div>
+                    <div class="theme-preset dark" onclick="changeTheme('dark')" title="Dark Theme"></div>
+                    <div class="theme-preset purple" onclick="changeTheme('purple')" title="Purple Theme"></div>
+                    <div class="theme-preset minimal" onclick="changeTheme('minimal')" title="Minimal Theme"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-grid">
+            <!-- Profile Card -->
+            <div class="profile-section">
+                <div class="profile-card anim-staggered">
+                    <div class="profile-img-container">
+                        <img src="Img/p.png" alt="Mohamed Ibrahim" class="profile-img" onerror="handleImageError(this)">
+                    </div>
+                    <h1 class="name">Mohamed Ibrahim</h1>
+                    <p class="bio">Web Designer & Developer</p>
+                    <div class="birthday-badge">
+                        <i class="fas fa-birthday-cake"></i>
+                        Birthday: 29/4/2009
+                        <div class="age-display" id="ageDisplay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="info-card anim-staggered" style="animation-delay: 80ms">
+                <h2 class="section-title"><i class="fas fa-address-book"></i> Contact Information</h2>
+                <div class="contact-grid">
+                    <div class="contact-item" onclick="copyToClipboard('+201145458526')">
+                        <div class="contact-details">
+                            <div class="contact-type">Primary Phone</div>
+                            <div class="contact-value">+20 1145458526</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/201145458526" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">WhatsApp</div>
+                            <div class="contact-value">01145458526</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/201553946710" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">Additional WhatsApp</div>
+                            <div class="contact-value">01553946710</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </a>
+                    
+                    <div class="contact-item" onclick="copyToClipboard('01500528737')">
+                        <div class="contact-details">
+                            <div class="contact-type">Additional Phone</div>
+                            <div class="contact-value">01500528737</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" onclick="copyToClipboard('mm8551939@gmail.com')">
+                        <div class="contact-details">
+                            <div class="contact-type">Email</div>
+                            <div class="contact-value">mm8551939@gmail.com</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="info-card anim-staggered" style="animation-delay: 160ms">
+                <h2 class="section-title"><i class="fas fa-share-alt"></i> Social Media</h2>
+                <div class="contact-grid">
+                    <a href="https://www.instagram.com/just.hamo.2009?igsh=dHdlNGMyZTloYjF2" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">Instagram</div>
+                            <div class="contact-value">just.hamo.2009</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://t.me/Ma7mee7o" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">Telegram</div>
+                            <div class="contact-value">@Ma7mee7o</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://discord.com/users/just_ma7ame7o" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">Discord</div>
+                            <div class="contact-value">just_ma7ame7o</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://t.me/KWGT2009" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <div class="contact-details">
+                            <div class="contact-type">KWGT Channel</div>
+                            <div class="contact-value">KWGT Widgets</div>
+                        </div>
+                        <div class="contact-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/just.hamo.2009?igsh=dHdlNGMyZTloYjF2" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/Ma7mee7o" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://discord.com/users/just_ma7ame7o" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://t.me/KWGT2009" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-palette"></i>
+                    </a>
+                    <a href="https://wa.me/201145458526" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Button -->
+        <div class="download-section">
+            <button class="download-btn" onclick="openDownloadModal()">
+                <i class="fas fa-download"></i>
+                Download Contact Information
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Sample data structure
+        const sampleData = {
+            fullName: "Mohamed Ibrahim",
+            bio: "Web Designer & Developer",
+            birthday: "2009-04-29",
+            phones: [
+                {type:"CELL", value:"+201145458526"},
+                {type:"CELL", value:"01145458526"},
+                {type:"CELL", value:"01553946710"},
+                {type:"CELL", value:"01500528737"}
+            ],
+            emails:["mm8551939@gmail.com"],
+            urls:[
+                "https://www.instagram.com/just.hamo.2009",
+                "https://t.me/Ma7mee7o",
+                "https://discord.com/users/just_ma7ame7o",
+                "https://t.me/KWGT2009"
+            ],
+            note:"Web designer & developer"
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            calculateAge();
+            initializeStickyCTA();
+            setupKeyboardShortcuts();
+            applyStaggeredAnimations();
+        });
+
+        // Apply staggered animations
+        function applyStaggeredAnimations() {
+            const elements = document.querySelectorAll('.anim-staggered');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 80) + 'ms';
+            });
+        }
+
+        // Theme Management
+        function setTheme(name) {
+            document.documentElement.setAttribute('data-theme', name);
+            localStorage.setItem('theme', name);
+            
+            document.querySelectorAll('.theme-preset').forEach(preset => {
+                preset.classList.remove('active');
+            });
+            document.querySelector(`.theme-preset.${name}`).classList.add('active');
+        }
+
+        function changeTheme(theme) {
+            setTheme(theme);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'default';
+            setTheme(savedTheme);
+        }
+
+        // Compact Mode
+        function toggleCompactMode() {
+            document.body.classList.toggle('compact-mode');
+            localStorage.setItem('compactMode', document.body.classList.contains('compact-mode'));
+        }
+
+        // Sticky CTA
+        function initializeStickyCTA() {
+            window.addEventListener('scroll', function() {
+                const stickyCTA = document.getElementById('stickyDownload');
+                if (window.scrollY > 300) {
+                    stickyCTA.classList.add('show');
+                } else {
+                    stickyCTA.classList.remove('show');
+                }
+            });
+        }
+
+        // Image error handler
+        function handleImageError(img) {
+            img.style.display = 'none';
+            img.parentElement.innerHTML = '<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg, var(--accent-1), var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-size:50px;"><i class="fas fa-user"></i></div>';
+        }
+
+        // Calculate age from birthday
+        function calculateAge() {
+            const birthday = new Date(2009, 3, 29);
+            const today = new Date();
+            let age = today.getFullYear() - birthday.getFullYear();
+            const monthDiff = today.getMonth() - birthday.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+                age--;
+            }
+            
+            document.getElementById('ageDisplay').textContent = `Age: ${age} years`;
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            });
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast anim-toast show';
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Modal management
+        function openDownloadModal() {
+            document.getElementById('downloadModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('downloadModal').style.display = 'none';
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        // Format generation functions
+        function makeVCF(data) {
+            const lines = [
+                "BEGIN:VCARD",
+                "VERSION:3.0",
+                `FN:${data.fullName}`,
+                `NOTE:${data.note}`
+            ];
+            
+            data.phones.forEach(phone => {
+                lines.push(`TEL;TYPE=${phone.type}:${phone.value}`);
+            });
+            
+            data.emails.forEach(email => {
+                lines.push(`EMAIL:${email}`);
+            });
+            
+            data.urls.forEach(url => {
+                lines.push(`URL:${url}`);
+            });
+            
+            if(data.birthday) {
+                lines.push(`BDAY:${data.birthday.replace(/-/g, '')}`);
+            }
+            
+            lines.push("END:VCARD");
+            return new Blob([lines.join("\r\n")], {type: 'text/vcard'});
+        }
+
+        function makeJSON(data) {
+            return new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        }
+
+        function makeTXT(data) {
+            let txt = `${data.fullName}\n`;
+            txt += `${data.bio}\n\n`;
+            txt += "Contact Information:\n";
+            data.phones.forEach(phone => {
+                txt += `Phone: ${phone.value}\n`;
+            });
+            txt += `Email: ${data.emails[0]}\n\n`;
+            txt += "Social Media:\n";
+            data.urls.forEach(url => {
+                txt += `${url}\n`;
+            });
+            return new Blob([txt], {type: 'text/plain'});
+        }
+
+        // Download functions
+        function downloadVCF() {
+            const blob = makeVCF(sampleData);
+            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.vcf`);
+            closeModal();
+            showToast('VCF file downloaded successfully!');
+        }
+
+        function downloadJSON() {
+            const blob = makeJSON(sampleData);
+            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.json`);
+            closeModal();
+            showToast('JSON file downloaded successfully!');
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Header
+            doc.setFillColor(41, 128, 185);
+            doc.rect(0, 0, 210, 50, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.text(sampleData.fullName, 20, 30);
+            doc.setFontSize(14);
+            doc.text(sampleData.bio, 20, 40);
+            
+            // Contact Information
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(16);
+            doc.text('Contact Information', 20, 70);
+            
+            doc.setFontSize(12);
+            let y = 85;
+            sampleData.phones.forEach(phone => {
+                doc.text(`Phone: ${phone.value}`, 20, y);
+                y += 8;
+            });
+            
+            doc.text(`Email: ${sampleData.emails[0]}`, 20, y);
+            y += 15;
+            
+            // Social Media
+            doc.setFontSize(16);
+            doc.text('Social Media', 20, y);
+            y += 10;
+            
+            doc.setFontSize(12);
+            sampleData.urls.forEach(url => {
+                doc.text(url, 20, y);
+                y += 8;
+            });
+            
+            doc.save(`Mohamed_Ibrahim_${getDateString()}.pdf`);
+            closeModal();
+            showToast('PDF file downloaded successfully!');
+        }
+
+        function downloadTXT() {
+            const blob = makeTXT(sampleData);
+            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.txt`);
+            closeModal();
+            showToast('TXT file downloaded successfully!');
+        }
+
+        // QR Code functions
+        function showQRCode() {
+            const vcfData = makeVCF(sampleData);
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: e.target.result,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            };
+            reader.readAsText(vcfData);
+            
+            document.getElementById('downloadModal').style.display = 'none';
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+
+        function downloadQRCode() {
+            const canvas = document.querySelector('#qrcode canvas');
+            const link = document.createElement('a');
+            link.download = `Mohamed_Ibrahim_QR_${getDateString()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast('QR Code downloaded!');
+        }
+
+        // Share functionality
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mohamed Ibrahim - Contact',
+                    text: 'Check out Mohamed Ibrahim\'s contact information',
+                    url: window.location.href
+                });
+            } else {
+                copyToClipboard(window.location.href);
+                showToast('Profile link copied to clipboard!');
+            }
+        }
+
+        // Accessibility Features
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+
+        function toggleLargeText() {
+            document.body.classList.toggle('large-text');
+        }
+
+        function resetAccessibility() {
+            document.body.classList.remove('high-contrast', 'large-text', 'compact-mode');
+            localStorage.removeItem('compactMode');
+        }
+
+        // Keyboard shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'd' || e.key === 'D') {
+                    openDownloadModal();
+                } else if (e.key === 'Escape') {
+                    closeModal();
+                    closeQRModal();
+                }
+            });
+        }
+
+        // Utility functions
+        function getDateString() {
+            const now = new Date();
+            return now.toISOString().split('T')[0];
+        }
+
+        function downloadFile(blob, fileName) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Load compact mode preference
+        if (localStorage.getItem('compactMode') === 'true') {
+            document.body.classList.add('compact-mode');
+        }
+    </script>
+</body>
+</html>
