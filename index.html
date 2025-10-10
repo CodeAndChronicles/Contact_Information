@@ -11,127 +11,49 @@
     <style>
         /* CSS Variables for Themes */
         :root {
-            --bg: #FBFDFF;
-            --card: #FFFFFF;
-            --text: #0F1724;
-            --muted: #6B7280;
-            --border: #E6EEF5;
-            --accent-1: #2EE6C1;
-            --accent-2: #00C2FF;
-            --danger: #FF4D4F;
-            --success: #10B981;
-            --warning: #F59E0B;
+            --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card: rgba(255, 255, 255, 0.95);
+            --text: #2d3748;
+            --muted: #718096;
+            --border: rgba(255, 255, 255, 0.2);
+            --accent-1: #4fd1c5;
+            --accent-2: #4299e1;
+            --danger: #fc8181;
+            --success: #48bb78;
+            --warning: #ed8936;
             --radius: 20px;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         [data-theme="dark"] {
-            --bg: #0B1220;
-            --card: #0F1724;
-            --text: #E6EEF5;
-            --muted: #94A3B8;
-            --border: rgba(255,255,255,0.04);
-            --accent-1: #6C63FF;
-            --accent-2: #00D4FF;
-            --danger: #FF6B6B;
-            --success: #34D399;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --card: rgba(30, 41, 59, 0.95);
+            --text: #f7fafc;
+            --muted: #cbd5e0;
+            --border: rgba(255, 255, 255, 0.1);
+            --accent-1: #81e6d9;
+            --accent-2: #63b3ed;
         }
 
-        [data-theme="purple"] {
-            --bg: #F6F7FB;
-            --card: #FFFFFF;
-            --text: #0B1220;
-            --muted: #7B7F9E;
-            --accent-1: #6C63FF;
-            --accent-2: #00D4FF;
-            --border: #E6EEF5;
+        [data-theme="sunset"] {
+            --bg: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            --card: rgba(255, 255, 255, 0.95);
+            --text: #2d3748;
+            --muted: #718096;
+            --accent-1: #ff6b6b;
+            --accent-2: #feca57;
         }
 
-        [data-theme="minimal"] {
-            --bg: #FFFFFF;
-            --card: #F8FAFC;
-            --text: #1E293B;
-            --muted: #64748B;
-            --accent-1: #6B7280;
-            --accent-2: #9CA3AF;
-            --border: #E2E8F0;
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Animation Classes */
-        .anim-slide-up { 
-            transform: translateY(16px); 
-            opacity:0; 
-            animation: slideUp 0.6s cubic-bezier(0.2,0.9,0.2,1) forwards; 
-        }
-        
-        .anim-pop { 
-            transform: scale(0.92); 
-            opacity:0; 
-            animation: popIn 0.35s cubic-bezier(0.2,0.9,0.2,1) forwards; 
-        }
-        
-        .anim-fade { 
-            opacity:0; 
-            transform: translateY(6px); 
-            animation: fadeIn 0.45s forwards; 
-        }
-        
-        .anim-scale-in { 
-            transform: scale(0.96); 
-            opacity:0; 
-            animation: scaleIn 0.28s forwards; 
-        }
-        
-        .anim-toast { 
-            animation: toast 0.45s ease both; 
-        }
-        
-        .anim-staggered { 
-            opacity:0; 
-            transform: translateY(10px); 
-            animation: staggerUp 0.5s forwards; 
-        }
-
-        @keyframes slideUp { 
-            to { transform: translateY(0); opacity:1; } 
-        }
-        
-        @keyframes popIn { 
-            60% { transform: scale(1.06); opacity:1; } 
-            100% { transform: scale(1); } 
-        }
-        
-        @keyframes fadeIn { 
-            to { opacity:1; transform: translateY(0); } 
-        }
-        
-        @keyframes scaleIn { 
-            to { transform: scale(1); opacity:1; } 
-        }
-        
-        @keyframes toast { 
-            0% { transform: translateY(8px); opacity:0; } 
-            60% { transform: translateY(-6px); opacity:1; } 
-            100% { transform: translateY(0); } 
-        }
-        
-        @keyframes staggerUp { 
-            to { opacity:1; transform: translateY(0); } 
+        [data-theme="nature"] {
+            --bg: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --card: rgba(255, 255, 255, 0.95);
+            --text: #2d3748;
+            --muted: #718096;
+            --accent-1: #43e97b;
+            --accent-2: #38f9d7;
         }
 
         /* Base Styles */
@@ -149,14 +71,56 @@
             padding: 20px;
             overflow-x: hidden;
             transition: var(--transition);
-            background-image: 
-                radial-gradient(circle at 10% 20%, var(--accent-1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, var(--accent-2) 0%, transparent 20%);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         /* Header */
@@ -181,7 +145,7 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 50px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             color: var(--text);
             cursor: pointer;
             display: flex;
@@ -189,30 +153,40 @@
             gap: 8px;
             transition: var(--transition);
             font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
         }
 
         .control-btn:hover {
             background: var(--accent-1);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .theme-presets {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            background: var(--card);
+            padding: 8px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
         }
 
         .theme-preset {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
             transition: var(--transition);
+            position: relative;
         }
 
         .theme-preset:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         .theme-preset.active {
@@ -220,20 +194,28 @@
             transform: scale(1.1);
         }
 
-        .theme-preset.default { background: linear-gradient(135deg, #2EE6C1, #00C2FF); }
-        .theme-preset.dark { background: linear-gradient(135deg, #6C63FF, #00D4FF); }
-        .theme-preset.purple { background: linear-gradient(135deg, #6C63FF, #00D4FF); }
-        .theme-preset.minimal { background: linear-gradient(135deg, #6B7280, #9CA3AF); }
-
-        /* Compact Mode */
-        .compact-mode .profile-img-container,
-        .compact-mode .social-grid {
-            display: none;
+        .theme-preset::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: conic-gradient(from 45deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .compact-mode .profile-card {
-            padding: 20px;
+        .theme-preset.active::after {
+            opacity: 1;
         }
+
+        .theme-preset.default { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .theme-preset.dark { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .theme-preset.sunset { background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb); }
+        .theme-preset.nature { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
         /* Main Grid */
         .main-grid {
@@ -251,7 +233,7 @@
 
         @media (min-width: 1024px) {
             .main-grid {
-                grid-template-columns: 350px 1fr 1fr;
+                grid-template-columns: 320px 1fr 1fr;
                 gap: 30px;
             }
         }
@@ -269,15 +251,20 @@
 
         .profile-card {
             background: var(--card);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius);
-            padding: 35px 30px;
+            padding: 40px 30px;
             text-align: center;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
             transition: var(--transition);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
         .profile-card::before {
@@ -293,8 +280,8 @@
 
         .profile-img-container {
             position: relative;
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 25px;
         }
 
@@ -311,8 +298,28 @@
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
         }
 
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: -5%;
+            left: -5%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            z-index: 1;
+            opacity: 0.3;
+            filter: blur(15px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-1);
+        }
+
         .name {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             margin-bottom: 10px;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
@@ -323,7 +330,7 @@
 
         .bio {
             color: var(--muted);
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -351,7 +358,7 @@
         /* Info Cards */
         .info-card {
             background: var(--card);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius);
             padding: 30px;
             box-shadow: var(--shadow);
@@ -364,11 +371,11 @@
 
         .info-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
         .section-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             margin-bottom: 25px;
             display: flex;
@@ -384,7 +391,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .contact-grid {
@@ -432,14 +439,14 @@
         }
 
         .contact-icon {
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 18px;
-            font-size: 22px;
+            font-size: 20px;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
             color: white;
             box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
@@ -477,21 +484,21 @@
         /* Social Grid */
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+            gap: 12px;
             margin-top: 20px;
         }
 
         .social-link {
             width: 100%;
             aspect-ratio: 1;
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--glass);
             color: var(--accent-1);
-            font-size: 24px;
+            font-size: 22px;
             transition: var(--transition);
             border: 1px solid var(--glass-border);
             position: relative;
@@ -518,7 +525,7 @@
         }
 
         .social-link:hover {
-            transform: translateY(-8px) scale(1.1);
+            transform: translateY(-5px) scale(1.1);
             color: white;
         }
 
@@ -531,22 +538,22 @@
             grid-column: 1 / -1;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .download-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            max-width: 350px;
+            padding: 18px 30px;
             border: none;
             border-radius: 16px;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
             color: white;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow);
@@ -572,35 +579,8 @@
         }
 
         .download-btn:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Sticky CTA */
-        .sticky-cta {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sticky-cta.show {
-            display: flex;
-        }
-
-        .sticky-cta:hover {
             transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         /* Modal */
@@ -633,7 +613,7 @@
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
 
@@ -641,7 +621,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .close-modal {
@@ -651,9 +631,16 @@
             font-size: 24px;
             cursor: pointer;
             transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-modal:hover {
+            background: var(--glass);
             color: var(--text);
         }
 
@@ -704,7 +691,7 @@
         /* Toast */
         .toast {
             position: fixed;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--success);
@@ -715,64 +702,19 @@
             font-weight: 600;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            box-shadow: var(--shadow);
+            animation: toastSlide 0.3s ease;
         }
 
-        .toast.show {
-            opacity: 1;
-        }
-
-        /* Accessibility */
-        .accessibility-toolbar {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 999;
-        }
-
-        .accessibility-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .accessibility-btn:hover {
-            background: var(--accent-1);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        /* High Contrast */
-        .high-contrast {
-            --bg: #000000;
-            --card: #111111;
-            --text: #FFFFFF;
-            --muted: #CCCCCC;
-            --border: #333333;
-        }
-
-        /* Large Text */
-        .large-text {
-            font-size: 18px;
-        }
-
-        .large-text .contact-value {
-            font-size: 18px;
-        }
-
-        .large-text .bio {
-            font-size: 20px;
+        @keyframes toastSlide {
+            from { 
+                transform: translateX(-50%) translateY(20px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         /* Responsive */
@@ -789,42 +731,46 @@
             .format-options {
                 grid-template-columns: 1fr;
             }
-            
-            .accessibility-toolbar {
-                bottom: 80px;
-                left: 10px;
-            }
         }
 
         @media (max-width: 480px) {
             .profile-img-container {
-                width: 130px;
-                height: 130px;
+                width: 120px;
+                height: 120px;
             }
             
             .name {
-                font-size: 28px;
+                font-size: 24px;
             }
             
             .bio {
-                font-size: 16px;
+                font-size: 15px;
             }
             
             .contact-item {
-                padding: 16px 18px;
+                padding: 15px;
             }
             
             .contact-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
                 margin-left: 15px;
+            }
+            
+            .theme-presets {
+                padding: 6px;
+            }
+            
+            .theme-preset {
+                width: 32px;
+                height: 32px;
             }
         }
 
         /* Print Styles */
         @media print {
-            .header, .download-section, .social-grid, .accessibility-toolbar, .sticky-cta {
+            .header-controls, .download-section, .social-grid {
                 display: none;
             }
             
@@ -838,26 +784,16 @@
                 background: white;
                 color: black;
             }
-            
-            .profile-img {
-                border-color: #ddd;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Sticky CTA -->
-    <button class="sticky-cta" id="stickyDownload">
-        <i class="fas fa-download"></i>
-        Download
-    </button>
-
     <!-- Toast -->
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" style="display: none;"></div>
 
     <!-- Download Modal -->
     <div class="modal" id="downloadModal">
-        <div class="modal-content anim-scale-in">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3>Choose Download Format</h3>
                 <button class="close-modal" onclick="closeModal()">×</button>
@@ -894,7 +830,7 @@
 
     <!-- QR Code Modal -->
     <div class="modal" id="qrModal">
-        <div class="modal-content anim-scale-in">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3>QR Code</h3>
                 <button class="close-modal" onclick="closeQRModal()">×</button>
@@ -902,48 +838,28 @@
             <div class="qr-container">
                 <div id="qrcode"></div>
                 <p>Scan this QR code to save my contact</p>
-                <button class="control-btn" onclick="downloadQRCode()">
+                <button class="download-btn" onclick="downloadQRCode()" style="max-width: 200px; margin: 15px auto;">
                     <i class="fas fa-download"></i>
-                    Download QR Code
+                    Download QR
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Accessibility Toolbar -->
-    <div class="accessibility-toolbar">
-        <button class="accessibility-btn" onclick="toggleHighContrast()" title="High Contrast" aria-label="Toggle high contrast mode">
-            <i class="fas fa-circle"></i>
-        </button>
-        <button class="accessibility-btn" onclick="toggleLargeText()" title="Large Text" aria-label="Toggle large text mode">
-            <i class="fas fa-text-height"></i>
-        </button>
-        <button class="accessibility-btn" onclick="toggleCompactMode()" title="Compact Mode" aria-label="Toggle compact mode">
-            <i class="fas fa-compress"></i>
-        </button>
-        <button class="accessibility-btn" onclick="resetAccessibility()" title="Reset" aria-label="Reset all accessibility settings">
-            <i class="fas fa-redo"></i>
-        </button>
-    </div>
-
     <div class="container">
         <!-- Header -->
-        <div class="header anim-slide-up">
-            <h1>Mohamed Ibrahim</h1>
+        <div class="header">
+            <h1 style="background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Mohamed Ibrahim</h1>
             <div class="header-controls">
                 <button class="control-btn" onclick="openDownloadModal()">
                     <i class="fas fa-download"></i>
                     Download Contact
                 </button>
-                <button class="control-btn" onclick="shareProfile()">
-                    <i class="fas fa-share-alt"></i>
-                    Share
-                </button>
                 <div class="theme-presets">
                     <div class="theme-preset default active" onclick="changeTheme('default')" title="Default Theme"></div>
                     <div class="theme-preset dark" onclick="changeTheme('dark')" title="Dark Theme"></div>
-                    <div class="theme-preset purple" onclick="changeTheme('purple')" title="Purple Theme"></div>
-                    <div class="theme-preset minimal" onclick="changeTheme('minimal')" title="Minimal Theme"></div>
+                    <div class="theme-preset sunset" onclick="changeTheme('sunset')" title="Sunset Theme"></div>
+                    <div class="theme-preset nature" onclick="changeTheme('nature')" title="Nature Theme"></div>
                 </div>
             </div>
         </div>
@@ -952,7 +868,7 @@
         <div class="main-grid">
             <!-- Profile Card -->
             <div class="profile-section">
-                <div class="profile-card anim-staggered">
+                <div class="profile-card">
                     <div class="profile-img-container">
                         <img src="Img/p.png" alt="Mohamed Ibrahim" class="profile-img" onerror="handleImageError(this)">
                     </div>
@@ -967,7 +883,7 @@
             </div>
 
             <!-- Contact Info -->
-            <div class="info-card anim-staggered" style="animation-delay: 80ms">
+            <div class="info-card">
                 <h2 class="section-title"><i class="fas fa-address-book"></i> Contact Information</h2>
                 <div class="contact-grid">
                     <div class="contact-item" onclick="copyToClipboard('+201145458526')">
@@ -1023,7 +939,7 @@
             </div>
 
             <!-- Social Media -->
-            <div class="info-card anim-staggered" style="animation-delay: 160ms">
+            <div class="info-card">
                 <h2 class="section-title"><i class="fas fa-share-alt"></i> Social Media</h2>
                 <div class="contact-grid">
                     <a href="https://www.instagram.com/just.hamo.2009?igsh=dHdlNGMyZTloYjF2" class="contact-item" target="_blank" rel="noopener noreferrer">
@@ -1122,18 +1038,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadTheme();
             calculateAge();
-            initializeStickyCTA();
-            setupKeyboardShortcuts();
-            applyStaggeredAnimations();
         });
-
-        // Apply staggered animations
-        function applyStaggeredAnimations() {
-            const elements = document.querySelectorAll('.anim-staggered');
-            elements.forEach((el, index) => {
-                el.style.animationDelay = (index * 80) + 'ms';
-            });
-        }
 
         // Theme Management
         function setTheme(name) {
@@ -1153,24 +1058,6 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme') || 'default';
             setTheme(savedTheme);
-        }
-
-        // Compact Mode
-        function toggleCompactMode() {
-            document.body.classList.toggle('compact-mode');
-            localStorage.setItem('compactMode', document.body.classList.contains('compact-mode'));
-        }
-
-        // Sticky CTA
-        function initializeStickyCTA() {
-            window.addEventListener('scroll', function() {
-                const stickyCTA = document.getElementById('stickyDownload');
-                if (window.scrollY > 300) {
-                    stickyCTA.classList.add('show');
-                } else {
-                    stickyCTA.classList.remove('show');
-                }
-            });
         }
 
         // Image error handler
@@ -1196,7 +1083,16 @@
         // Copy to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast('Copied to clipboard!');
+                showToast('✓ Copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('✓ Copied to clipboard!');
             });
         }
 
@@ -1204,10 +1100,11 @@
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.className = 'toast anim-toast show';
+            toast.style.display = 'block';
+            
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+                toast.style.display = 'none';
+            }, 2000);
         }
 
         // Modal management
@@ -1273,143 +1170,131 @@
 
         // Download functions
         function downloadVCF() {
-            const blob = makeVCF(sampleData);
-            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.vcf`);
-            closeModal();
-            showToast('VCF file downloaded successfully!');
+            try {
+                const blob = makeVCF(sampleData);
+                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.vcf`);
+                closeModal();
+                showToast('✓ VCF downloaded successfully!');
+            } catch (error) {
+                showToast('❌ Download failed!');
+            }
         }
 
         function downloadJSON() {
-            const blob = makeJSON(sampleData);
-            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.json`);
-            closeModal();
-            showToast('JSON file downloaded successfully!');
+            try {
+                const blob = makeJSON(sampleData);
+                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.json`);
+                closeModal();
+                showToast('✓ JSON downloaded successfully!');
+            } catch (error) {
+                showToast('❌ Download failed!');
+            }
         }
 
         function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Header
-            doc.setFillColor(41, 128, 185);
-            doc.rect(0, 0, 210, 50, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(24);
-            doc.text(sampleData.fullName, 20, 30);
-            doc.setFontSize(14);
-            doc.text(sampleData.bio, 20, 40);
-            
-            // Contact Information
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(16);
-            doc.text('Contact Information', 20, 70);
-            
-            doc.setFontSize(12);
-            let y = 85;
-            sampleData.phones.forEach(phone => {
-                doc.text(`Phone: ${phone.value}`, 20, y);
-                y += 8;
-            });
-            
-            doc.text(`Email: ${sampleData.emails[0]}`, 20, y);
-            y += 15;
-            
-            // Social Media
-            doc.setFontSize(16);
-            doc.text('Social Media', 20, y);
-            y += 10;
-            
-            doc.setFontSize(12);
-            sampleData.urls.forEach(url => {
-                doc.text(url, 20, y);
-                y += 8;
-            });
-            
-            doc.save(`Mohamed_Ibrahim_${getDateString()}.pdf`);
-            closeModal();
-            showToast('PDF file downloaded successfully!');
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Header
+                doc.setFillColor(41, 128, 185);
+                doc.rect(0, 0, 210, 50, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(24);
+                doc.text(sampleData.fullName, 20, 30);
+                doc.setFontSize(14);
+                doc.text(sampleData.bio, 20, 40);
+                
+                // Contact Information
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(16);
+                doc.text('Contact Information', 20, 70);
+                
+                doc.setFontSize(12);
+                let y = 85;
+                sampleData.phones.forEach(phone => {
+                    doc.text(`Phone: ${phone.value}`, 20, y);
+                    y += 8;
+                });
+                
+                doc.text(`Email: ${sampleData.emails[0]}`, 20, y);
+                y += 15;
+                
+                // Social Media
+                doc.setFontSize(16);
+                doc.text('Social Media', 20, y);
+                y += 10;
+                
+                doc.setFontSize(12);
+                sampleData.urls.forEach(url => {
+                    doc.text(url, 20, y);
+                    y += 8;
+                });
+                
+                doc.save(`Mohamed_Ibrahim_${getDateString()}.pdf`);
+                closeModal();
+                showToast('✓ PDF downloaded successfully!');
+            } catch (error) {
+                showToast('❌ PDF download failed!');
+            }
         }
 
         function downloadTXT() {
-            const blob = makeTXT(sampleData);
-            downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.txt`);
-            closeModal();
-            showToast('TXT file downloaded successfully!');
+            try {
+                const blob = makeTXT(sampleData);
+                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.txt`);
+                closeModal();
+                showToast('✓ TXT downloaded successfully!');
+            } catch (error) {
+                showToast('❌ Download failed!');
+            }
         }
 
         // QR Code functions
         function showQRCode() {
-            const vcfData = makeVCF(sampleData);
-            const reader = new FileReader();
-            reader.onload = function(e) {
+            try {
+                // Clear previous QR code
+                document.getElementById('qrcode').innerHTML = '';
+                
+                const contactUrl = window.location.href;
                 const qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: e.target.result,
+                    text: contactUrl,
                     width: 200,
                     height: 200,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
-            };
-            reader.readAsText(vcfData);
-            
-            document.getElementById('downloadModal').style.display = 'none';
-            document.getElementById('qrModal').style.display = 'flex';
-        }
-
-        function downloadQRCode() {
-            const canvas = document.querySelector('#qrcode canvas');
-            const link = document.createElement('a');
-            link.download = `Mohamed_Ibrahim_QR_${getDateString()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast('QR Code downloaded!');
-        }
-
-        // Share functionality
-        function shareProfile() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Mohamed Ibrahim - Contact',
-                    text: 'Check out Mohamed Ibrahim\'s contact information',
-                    url: window.location.href
-                });
-            } else {
-                copyToClipboard(window.location.href);
-                showToast('Profile link copied to clipboard!');
+                
+                document.getElementById('downloadModal').style.display = 'none';
+                document.getElementById('qrModal').style.display = 'flex';
+            } catch (error) {
+                showToast('❌ QR Code generation failed!');
             }
         }
 
-        // Accessibility Features
-        function toggleHighContrast() {
-            document.body.classList.toggle('high-contrast');
-        }
-
-        function toggleLargeText() {
-            document.body.classList.toggle('large-text');
-        }
-
-        function resetAccessibility() {
-            document.body.classList.remove('high-contrast', 'large-text', 'compact-mode');
-            localStorage.removeItem('compactMode');
-        }
-
-        // Keyboard shortcuts
-        function setupKeyboardShortcuts() {
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'd' || e.key === 'D') {
-                    openDownloadModal();
-                } else if (e.key === 'Escape') {
-                    closeModal();
-                    closeQRModal();
+        function downloadQRCode() {
+            try {
+                const canvas = document.querySelector('#qrcode canvas');
+                if (!canvas) {
+                    showToast('❌ No QR Code available!');
+                    return;
                 }
-            });
+                
+                const link = document.createElement('a');
+                link.download = `Mohamed_Ibrahim_QR_${getDateString()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('✓ QR Code downloaded!');
+            } catch (error) {
+                showToast('❌ QR Code download failed!');
+            }
         }
 
         // Utility functions
         function getDateString() {
             const now = new Date();
-            return now.toISOString().split('T')[0];
+            return now.toISOString().split('T')[0].replace(/-/g, '');
         }
 
         function downloadFile(blob, fileName) {
@@ -1430,10 +1315,13 @@
             }
         });
 
-        // Load compact mode preference
-        if (localStorage.getItem('compactMode') === 'true') {
-            document.body.classList.add('compact-mode');
-        }
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeQRModal();
+            }
+        });
     </script>
 </body>
 </html>
