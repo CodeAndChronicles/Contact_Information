@@ -1,76 +1,150 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Ibrahim | Web Designer & Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Themes */
+        /* ===== CSS VARIABLES ===== */
         :root {
-            --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card: rgba(255, 255, 255, 0.95);
-            --text: #2d3748;
-            --muted: #718096;
-            --border: rgba(255, 255, 255, 0.2);
-            --accent-1: #4fd1c5;
-            --accent-2: #4299e1;
-            --danger: #fc8181;
-            --success: #48bb78;
-            --warning: #ed8936;
-            --radius: 20px;
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            /* Light Theme Colors */
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --secondary-light: #22d3ee;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --warning: #f59e0b;
+            --warning-light: #fbbf24;
+            --danger: #ef4444;
+            --danger-light: #f87171;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-glass: rgba(255, 255, 255, 0.8);
+            --bg-glass-dark: rgba(255, 255, 255, 0.1);
+            
+            /* Text Colors */
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --text-inverse: #ffffff;
+            
+            /* Border & Shadow */
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--secondary));
+            --gradient-warning: linear-gradient(135deg, var(--warning), var(--danger-light));
+            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Z-index */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal: 1040;
+            --z-popover: 1050;
+            --z-tooltip: 1060;
+            --z-toast: 1070;
         }
 
+        /* ===== DARK THEME ===== */
         [data-theme="dark"] {
-            --bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            --card: rgba(30, 41, 59, 0.95);
-            --text: #f7fafc;
-            --muted: #cbd5e0;
-            --border: rgba(255, 255, 255, 0.1);
-            --accent-1: #81e6d9;
-            --accent-2: #63b3ed;
+            --primary: #818cf8;
+            --primary-light: #a5b4fc;
+            --primary-dark: #6366f1;
+            --secondary: #22d3ee;
+            --secondary-light: #67e8f9;
+            --accent: #34d399;
+            --accent-light: #6ee7b7;
+            --warning: #fbbf24;
+            --warning-light: #fcd34d;
+            --danger: #f87171;
+            --danger-light: #fca5a5;
+            
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --bg-glass: rgba(30, 41, 59, 0.8);
+            --bg-glass-dark: rgba(15, 23, 42, 0.5);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --text-inverse: #0f172a;
+            
+            --border: #334155;
+            --border-light: #475569;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            
+            --gradient-glass: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.7));
         }
 
-        [data-theme="sunset"] {
-            --bg: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
-            --card: rgba(255, 255, 255, 0.95);
-            --text: #2d3748;
-            --muted: #718096;
-            --accent-1: #ff6b6b;
-            --accent-2: #feca57;
-        }
-
-        [data-theme="nature"] {
-            --bg: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --card: rgba(255, 255, 255, 0.95);
-            --text: #2d3748;
-            --muted: #718096;
-            --accent-1: #43e97b;
-            --accent-2: #38f9d7;
-        }
-
-        /* Base Styles */
+        /* ===== BASE STYLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: var(--font-family);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition-slow);
             overflow-x: hidden;
-            transition: var(--transition);
             position: relative;
         }
 
@@ -81,190 +155,199 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg);
-            z-index: -2;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        body::after {
-            content: '';
+        [data-theme="dark"] body::before {
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(129, 140, 248, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%);
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+
+        h1 {
+            font-size: var(--font-size-5xl);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: var(--font-size-4xl);
+        }
+
+        h3 {
+            font-size: var(--font-size-3xl);
+        }
+
+        h4 {
+            font-size: var(--font-size-2xl);
+        }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .section {
+            padding: var(--space-3xl) 0;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1;
-            animation: float 6s ease-in-out infinite;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: var(--z-fixed);
+            transition: var(--transition-normal);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(1deg); }
-            66% { transform: translateY(5px) rotate(-1deg); }
+        .header.scrolled {
+            box-shadow: var(--shadow-lg);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-
-        /* Header */
-        .header {
+        .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-            flex-wrap: wrap;
-            gap: 20px;
+            padding: var(--space-md) 0;
         }
 
-        .header-controls {
+        .logo {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
+            list-style: none;
+            gap: var(--space-2xl);
         }
 
-        .control-btn {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 12px 24px;
-            color: var(--text);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            font-size: 14px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-        }
-
-        .control-btn:hover {
-            background: var(--accent-1);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .theme-presets {
-            display: flex;
-            gap: 12px;
-            background: var(--card);
-            padding: 8px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-        }
-
-        .theme-preset {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: var(--transition);
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition-fast);
             position: relative;
         }
 
-        .theme-preset:hover {
-            transform: scale(1.15);
+        .nav-link:hover {
+            color: var(--text-primary);
         }
 
-        .theme-preset.active {
-            border-color: var(--text);
-            transform: scale(1.1);
-        }
-
-        .theme-preset::after {
+        .nav-link::after {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border-radius: 50%;
-            background: conic-gradient(from 45deg, var(--accent-1), var(--accent-2), var(--accent-1));
-            z-index: -1;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            animation: titleReveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transform: translateY(50px);
         }
 
-        .theme-preset.active::after {
-            opacity: 1;
-        }
-
-        .theme-preset.default { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .theme-preset.dark { background: linear-gradient(135deg, #1e3c72, #2a5298); }
-        .theme-preset.sunset { background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb); }
-        .theme-preset.nature { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        @media (min-width: 768px) {
-            .main-grid {
-                grid-template-columns: 1fr 1fr;
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (min-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 320px 1fr 1fr;
-                gap: 30px;
+        .hero-subtitle {
+            font-size: var(--font-size-2xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            animation: fadeInUp 1s 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Profile Card */
+        /* ===== PROFILE SECTION ===== */
         .profile-section {
-            grid-column: 1 / -1;
-        }
-
-        @media (min-width: 1024px) {
-            .profile-section {
-                grid-column: 1 / 2;
-            }
+            position: relative;
         }
 
         .profile-card {
-            background: var(--card);
+            background: var(--bg-glass);
             backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            box-shadow: var(--shadow-xl);
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-normal);
         }
 
         .profile-card::before {
@@ -274,28 +357,36 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            border-radius: var(--radius) var(--radius) 0 0;
+            background: var(--gradient-primary);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
         }
 
         .profile-img-container {
             position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 25px;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto var(--space-xl);
         }
 
         .profile-img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             object-fit: cover;
-            border: 4px solid var(--card);
-            box-shadow: var(--shadow);
+            border: 4px solid var(--bg-primary);
+            box-shadow: var(--shadow-xl);
             position: relative;
             z-index: 2;
-            transition: var(--transition);
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            transition: var(--transition-normal);
         }
 
         .profile-img-container::before {
@@ -305,205 +396,281 @@
             height: 110%;
             top: -5%;
             left: -5%;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: var(--radius-full);
+            background: var(--gradient-primary);
             z-index: 1;
             opacity: 0.3;
-            filter: blur(15px);
+            filter: blur(20px);
             animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
         }
 
         .profile-img:hover {
             transform: scale(1.05);
-            border-color: var(--accent-1);
         }
 
-        .name {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .profile-name {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-sm);
         }
 
-        .bio {
-            color: var(--muted);
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .profile-bio {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
         }
 
-        .birthday-badge {
+        .profile-badges {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-            padding: 10px 18px;
-            border-radius: 50px;
-            font-size: 14px;
+            gap: var(--space-sm);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
             font-weight: 600;
-            margin-top: 10px;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-        }
-
-        .age-display {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 5px;
-        }
-
-        /* Info Cards */
-        .info-card {
-            background: var(--card);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            transition: var(--transition);
+            transition: var(--transition-fast);
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .badge i {
+            color: var(--primary);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .contact-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition-normal);
+            z-index: 0;
         }
 
-        .info-card:hover {
+        .contact-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .contact-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-xl);
         }
 
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 25px;
+        .contact-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: var(--text);
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
         }
 
-        .section-title i {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 22px;
-        }
-
-        .contact-grid {
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-lg);
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
+            font-size: var(--font-size-2xl);
+            box-shadow: var(--shadow);
+            transition: var(--transition-normal);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .contact-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .contact-subtitle {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            padding: 18px 20px;
-            border-radius: 16px;
-            background: var(--glass);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            opacity: 0.1;
-            transition: width 0.3s ease;
-            z-index: 0;
-        }
-
-        .contact-item:hover::before {
-            width: 100%;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-sm);
+            transition: var(--transition-fast);
+            border: 1px solid transparent;
         }
 
         .contact-item:hover {
-            transform: translateX(-5px);
-            border-color: var(--accent-1);
+            background: var(--bg-tertiary);
+            border-color: var(--border);
+            transform: translateX(5px);
         }
 
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
+        .contact-item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 18px;
-            font-size: 20px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: white;
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
-            position: relative;
-            z-index: 1;
-            transition: var(--transition);
-            flex-shrink: 0;
+            background: var(--bg-primary);
+            color: var(--primary);
+            font-size: var(--font-size-lg);
+            box-shadow: var(--shadow);
         }
 
-        .contact-item:hover .contact-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .contact-details {
+        .contact-item-content {
             flex: 1;
-            text-align: left;
+        }
+
+        .contact-item-title {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .contact-item-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-normal);
             position: relative;
-            z-index: 1;
+            overflow: hidden;
         }
 
-        .contact-type {
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 6px;
-            font-weight: 500;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-slow);
         }
 
-        .contact-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text);
-            word-break: break-word;
+        .btn:hover::before {
+            left: 100%;
         }
 
-        /* Social Grid */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+        }
+
+        /* ===== SOCIAL SECTION ===== */
+        .social-section {
+            text-align: center;
+        }
+
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: var(--space-lg);
+            max-width: 600px;
+            margin: var(--space-2xl) auto;
         }
 
         .social-link {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 14px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: var(--glass);
-            color: var(--accent-1);
-            font-size: 22px;
-            transition: var(--transition);
-            border: 1px solid var(--glass-border);
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
-            text-decoration: none;
         }
 
         .social-link::before {
@@ -513,54 +680,105 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background: var(--gradient-primary);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: var(--transition-normal);
             z-index: 0;
         }
 
-        .social-link i {
+        .social-link:hover::before {
+            opacity: 0.1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            color: var(--primary);
+            font-size: var(--font-size-2xl);
+            box-shadow: var(--shadow);
+            transition: var(--transition-normal);
             position: relative;
             z-index: 1;
         }
 
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.1);
-            color: white;
+        .social-link:hover .social-icon {
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .social-link:hover::before {
-            opacity: 1;
+        .social-name {
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            position: relative;
+            z-index: 1;
         }
 
-        /* Download Section */
+        /* ===== DOWNLOAD SECTION ===== */
         .download-section {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
+            text-align: center;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin: var(--space-3xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-title {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        .download-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            font-size: var(--font-size-lg);
         }
 
         .download-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            max-width: 350px;
-            padding: 18px 30px;
+            gap: var(--space-md);
+            padding: var(--space-lg) var(--space-2xl);
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
             border: none;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: white;
-            font-size: 17px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-lg);
             font-weight: 700;
             cursor: pointer;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
         .download-btn::before {
@@ -570,8 +788,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition-slow);
         }
 
         .download-btn:hover::before {
@@ -580,507 +798,644 @@
 
         .download-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-xl);
         }
 
-        /* Modal */
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: var(--space-2xl);
+            right: var(--space-2xl);
+            width: 60px;
+            height: 60px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-lg);
+            z-index: var(--z-fixed);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .theme-toggle i {
+            font-size: var(--font-size-xl);
+            color: var(--text-primary);
+            transition: var(--transition-normal);
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: var(--space-2xl);
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            padding: var(--space-lg) var(--space-2xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+            z-index: var(--z-toast);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== MODAL ===== */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            z-index: var(--z-modal);
+            padding: var(--space-lg);
         }
 
-        .modal-content {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 30px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+        .modal.show {
+            display: flex;
             animation: modalFadeIn 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+            position: relative;
+            animation: modalSlideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: var(--space-2xl);
         }
 
-        .close-modal {
+        .modal-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+
+        .modal-close {
             background: none;
             border: none;
-            color: var(--muted);
-            font-size: 24px;
+            font-size: var(--font-size-2xl);
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: var(--transition-fast);
             width: 40px;
             height: 40px;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .close-modal:hover {
-            background: var(--glass);
-            color: var(--text);
+        .modal-close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
-        .format-options {
+        .format-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-lg);
         }
 
         .format-option {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-xl);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-normal);
+            border: 1px solid transparent;
         }
 
         .format-option:hover {
-            background: var(--card);
-            border-color: var(--accent-1);
-            transform: translateY(-3px);
+            background: var(--bg-tertiary);
+            border-color: var(--border);
+            transform: translateY(-5px);
         }
 
-        .format-option i {
-            font-size: 32px;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .format-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            color: var(--text-inverse);
+            font-size: var(--font-size-xl);
         }
 
-        .qr-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        #qrcode {
-            display: inline-block;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 10px 0;
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--success);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            z-index: 1001;
+        .format-name {
             font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: var(--shadow);
-            animation: toastSlide 0.3s ease;
+            font-size: var(--font-size-sm);
         }
 
-        @keyframes toastSlide {
-            from { 
-                transform: translateX(-50%) translateY(20px);
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
+                transform: translateY(30px);
             }
-            to { 
-                transform: translateX(-50%) translateY(0);
+            to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Responsive */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
+            .container {
+                padding: 0 var(--space-md);
             }
-            
-            .header-controls {
-                justify-content: center;
+
+            .nav-links {
+                display: none;
             }
-            
-            .format-options {
+
+            .hero-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+
+            .profile-img-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .contact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: var(--space-md);
+            }
+
+            .theme-toggle {
+                bottom: var(--space-lg);
+                right: var(--space-lg);
+                width: 50px;
+                height: 50px;
+            }
+
+            .section {
+                padding: var(--space-2xl) 0;
             }
         }
 
         @media (max-width: 480px) {
-            .profile-img-container {
-                width: 120px;
-                height: 120px;
+            .profile-card,
+            .contact-card,
+            .download-section {
+                padding: var(--space-xl);
             }
-            
-            .name {
-                font-size: 24px;
+
+            .btn {
+                padding: var(--space-md);
+                font-size: var(--font-size-sm);
             }
-            
-            .bio {
-                font-size: 15px;
-            }
-            
-            .contact-item {
-                padding: 15px;
-            }
-            
-            .contact-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                margin-left: 15px;
-            }
-            
-            .theme-presets {
-                padding: 6px;
-            }
-            
-            .theme-preset {
-                width: 32px;
-                height: 32px;
+
+            .download-btn {
+                padding: var(--space-lg);
+                font-size: var(--font-size-base);
             }
         }
 
-        /* Print Styles */
-        @media print {
-            .header-controls, .download-section, .social-grid {
-                display: none;
-            }
-            
-            .profile-card, .info-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                break-inside: avoid;
-            }
-            
-            body {
-                background: white;
-                color: black;
-            }
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mt-0 {
+            margin-top: 0;
+        }
+
+        .opacity-0 {
+            opacity: 0;
+        }
+
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .pointer-events-none {
+            pointer-events: none;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .select-none {
+            user-select: none;
+        }
+
+        .transition-all {
+            transition: var(--transition-normal);
         }
     </style>
 </head>
 <body>
-    <!-- Toast -->
-    <div class="toast" id="toast" style="display: none;"></div>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">Mohamed Ibrahim</a>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#download" class="nav-link">Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Mohamed Ibrahim</h1>
+                <p class="hero-subtitle">Web Designer & Developer</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="scrollToSection('about')">
+                        <i class="fas fa-user"></i>
+                        About Me
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('contact')">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section section" id="about">
+        <div class="container">
+            <div class="profile-card animate-fade-in">
+                <div class="profile-header">
+                    <div class="profile-img-container">
+                        <img src="Img/p.png" alt="Mohamed Ibrahim" class="profile-img" onerror="handleImageError(this)">
+                    </div>
+                    <h2 class="profile-name">Mohamed Ibrahim</h2>
+                    <p class="profile-bio">Web designer & programmer</p>
+                    <div class="profile-badges">
+                        <div class="badge">
+                            <i class="fas fa-birthday-cake"></i>
+                            Birthday: 29/4/2009
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Egypt
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-0">Contact Information</h2>
+            <p class="text-center">Get in touch with me through any of these channels</p>
+            
+            <div class="contact-grid">
+                <!-- Phone Contacts -->
+                <div class="contact-card animate-slide-left">
+                    <div class="contact-header">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="contact-title">Phone Numbers</h3>
+                            <p class="contact-subtitle">Available for calls and WhatsApp</p>
+                        </div>
+                    </div>
+                    <div class="contact-content">
+                        <div class="contact-item" onclick="copyToClipboard('+201145458526')">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">Primary Number</div>
+                                <div class="contact-item-value">+20 1145458526</div>
+                            </div>
+                        </div>
+                        <div class="contact-item" onclick="copyToClipboard('01145458526')">
+                            <div class="contact-item-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">WhatsApp</div>
+                                <div class="contact-item-value">01145458526</div>
+                            </div>
+                        </div>
+                        <div class="contact-item" onclick="copyToClipboard('01553946710')">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">Additional Number</div>
+                                <div class="contact-item-value">01553946710</div>
+                            </div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-primary" onclick="callNumber('+201145458526')">
+                                <i class="fas fa-phone"></i>
+                                Call Now
+                            </button>
+                            <button class="btn btn-secondary" onclick="openWhatsApp('+201145458526')">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email & Social -->
+                <div class="contact-card animate-slide-right">
+                    <div class="contact-header">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="contact-title">Email & Social</h3>
+                            <p class="contact-subtitle">Digital communication channels</p>
+                        </div>
+                    </div>
+                    <div class="contact-content">
+                        <div class="contact-item" onclick="copyToClipboard('mm8551939@gmail.com')">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-at"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">Email Address</div>
+                                <div class="contact-item-value">mm8551939@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="contact-item" onclick="copyToClipboard('just.hamo.2009')">
+                            <div class="contact-item-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">Instagram</div>
+                                <div class="contact-item-value">just.hamo.2009</div>
+                            </div>
+                        </div>
+                        <div class="contact-item" onclick="copyToClipboard('@Ma7mee7o')">
+                            <div class="contact-item-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <div class="contact-item-title">Telegram</div>
+                                <div class="contact-item-value">@Ma7mee7o</div>
+                            </div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-primary" onclick="sendEmail()">
+                                <i class="fas fa-envelope"></i>
+                                Send Email
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyAllContacts()">
+                                <i class="fas fa-copy"></i>
+                                Copy All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section section">
+        <div class="container">
+            <h2>Social Media</h2>
+            <p>Connect with me on social platforms</p>
+            
+            <div class="social-grid">
+                <a href="https://www.instagram.com/just.hamo.2009" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span class="social-name">Instagram</span>
+                </a>
+                <a href="https://t.me/Ma7mee7o" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <span class="social-name">Telegram</span>
+                </a>
+                <a href="https://discord.com/users/just_ma7ame7o" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <span class="social-name">Discord</span>
+                </a>
+                <a href="https://t.me/KWGT2009" class="social-link" target="_blank">
+                    <div class="social-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <span class="social-name">KWGT</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section section" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Download Contact Card</h2>
+                <p class="download-subtitle">Save my contact information directly to your device</p>
+                <button class="download-btn" onclick="openDownloadModal()">
+                    <i class="fas fa-download"></i>
+                    Download vCard
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <!-- Download Modal -->
     <div class="modal" id="downloadModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Choose Download Format</h3>
-                <button class="close-modal" onclick="closeModal()">×</button>
+                <h3 class="modal-title">Download Format</h3>
+                <button class="modal-close" onclick="closeDownloadModal()">×</button>
             </div>
-            <div class="format-options">
+            <div class="format-grid">
                 <div class="format-option" onclick="downloadVCF()">
-                    <i class="fas fa-address-card"></i>
-                    <div>VCF File</div>
-                    <small>Add to Contacts</small>
+                    <div class="format-icon">
+                        <i class="fas fa-address-card"></i>
+                    </div>
+                    <span class="format-name">VCF File</span>
                 </div>
                 <div class="format-option" onclick="downloadJSON()">
-                    <i class="fas fa-code"></i>
-                    <div>JSON</div>
-                    <small>For Developers</small>
+                    <div class="format-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="format-name">JSON</span>
                 </div>
                 <div class="format-option" onclick="downloadPDF()">
-                    <i class="fas fa-file-pdf"></i>
-                    <div>PDF</div>
-                    <small>Printable</small>
-                </div>
-                <div class="format-option" onclick="downloadTXT()">
-                    <i class="fas fa-file-alt"></i>
-                    <div>TXT</div>
-                    <small>Plain Text</small>
-                </div>
-                <div class="format-option" onclick="showQRCode()">
-                    <i class="fas fa-qrcode"></i>
-                    <div>QR Code</div>
-                    <small>Quick Scan</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- QR Code Modal -->
-    <div class="modal" id="qrModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>QR Code</h3>
-                <button class="close-modal" onclick="closeQRModal()">×</button>
-            </div>
-            <div class="qr-container">
-                <div id="qrcode"></div>
-                <p>Scan this QR code to save my contact</p>
-                <button class="download-btn" onclick="downloadQRCode()" style="max-width: 200px; margin: 15px auto;">
-                    <i class="fas fa-download"></i>
-                    Download QR
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1 style="background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Mohamed Ibrahim</h1>
-            <div class="header-controls">
-                <button class="control-btn" onclick="openDownloadModal()">
-                    <i class="fas fa-download"></i>
-                    Download Contact
-                </button>
-                <div class="theme-presets">
-                    <div class="theme-preset default active" onclick="changeTheme('default')" title="Default Theme"></div>
-                    <div class="theme-preset dark" onclick="changeTheme('dark')" title="Dark Theme"></div>
-                    <div class="theme-preset sunset" onclick="changeTheme('sunset')" title="Sunset Theme"></div>
-                    <div class="theme-preset nature" onclick="changeTheme('nature')" title="Nature Theme"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-grid">
-            <!-- Profile Card -->
-            <div class="profile-section">
-                <div class="profile-card">
-                    <div class="profile-img-container">
-                        <img src="Img/p.png" alt="Mohamed Ibrahim" class="profile-img" onerror="handleImageError(this)">
+                    <div class="format-icon">
+                        <i class="fas fa-file-pdf"></i>
                     </div>
-                    <h1 class="name">Mohamed Ibrahim</h1>
-                    <p class="bio">Web Designer & Developer</p>
-                    <div class="birthday-badge">
-                        <i class="fas fa-birthday-cake"></i>
-                        Birthday: 29/4/2009
-                        <div class="age-display" id="ageDisplay"></div>
+                    <span class="format-name">PDF</span>
+                </div>
+                <div class="format-option" onclick="downloadText()">
+                    <div class="format-icon">
+                        <i class="fas fa-file-alt"></i>
                     </div>
+                    <span class="format-name">Text File</span>
                 </div>
             </div>
-
-            <!-- Contact Info -->
-            <div class="info-card">
-                <h2 class="section-title"><i class="fas fa-address-book"></i> Contact Information</h2>
-                <div class="contact-grid">
-                    <div class="contact-item" onclick="copyToClipboard('+201145458526')">
-                        <div class="contact-details">
-                            <div class="contact-type">Primary Phone</div>
-                            <div class="contact-value">+20 1145458526</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                    </div>
-                    
-                    <a href="https://wa.me/201145458526" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">WhatsApp</div>
-                            <div class="contact-value">01145458526</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="https://wa.me/201553946710" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">Additional WhatsApp</div>
-                            <div class="contact-value">01553946710</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                    </a>
-                    
-                    <div class="contact-item" onclick="copyToClipboard('01500528737')">
-                        <div class="contact-details">
-                            <div class="contact-type">Additional Phone</div>
-                            <div class="contact-value">01500528737</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item" onclick="copyToClipboard('mm8551939@gmail.com')">
-                        <div class="contact-details">
-                            <div class="contact-type">Email</div>
-                            <div class="contact-value">mm8551939@gmail.com</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Media -->
-            <div class="info-card">
-                <h2 class="section-title"><i class="fas fa-share-alt"></i> Social Media</h2>
-                <div class="contact-grid">
-                    <a href="https://www.instagram.com/just.hamo.2009?igsh=dHdlNGMyZTloYjF2" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">Instagram</div>
-                            <div class="contact-value">just.hamo.2009</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="https://t.me/Ma7mee7o" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">Telegram</div>
-                            <div class="contact-value">@Ma7mee7o</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fab fa-telegram"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="https://discord.com/users/just_ma7ame7o" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">Discord</div>
-                            <div class="contact-value">just_ma7ame7o</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fab fa-discord"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="https://t.me/KWGT2009" class="contact-item" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-details">
-                            <div class="contact-type">KWGT Channel</div>
-                            <div class="contact-value">KWGT Widgets</div>
-                        </div>
-                        <div class="contact-icon">
-                            <i class="fas fa-broadcast-tower"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="social-grid">
-                    <a href="https://www.instagram.com/just.hamo.2009?igsh=dHdlNGMyZTloYjF2" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://t.me/Ma7mee7o" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://discord.com/users/just_ma7ame7o" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                    <a href="https://t.me/KWGT2009" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-palette"></i>
-                    </a>
-                    <a href="https://wa.me/201145458526" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Download Button -->
-        <div class="download-section">
-            <button class="download-btn" onclick="openDownloadModal()">
-                <i class="fas fa-download"></i>
-                Download Contact Information
-            </button>
         </div>
     </div>
 
     <script>
-        // Sample data structure
-        const sampleData = {
-            fullName: "Mohamed Ibrahim",
-            bio: "Web Designer & Developer",
-            birthday: "2009-04-29",
-            phones: [
-                {type:"CELL", value:"+201145458526"},
-                {type:"CELL", value:"01145458526"},
-                {type:"CELL", value:"01553946710"},
-                {type:"CELL", value:"01500528737"}
-            ],
-            emails:["mm8551939@gmail.com"],
-            urls:[
-                "https://www.instagram.com/just.hamo.2009",
-                "https://t.me/Ma7mee7o",
-                "https://discord.com/users/just_ma7ame7o",
-                "https://t.me/KWGT2009"
-            ],
-            note:"Web designer & developer"
-        };
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            loadTheme();
-            calculateAge();
-        });
-
-        // Theme Management
-        function setTheme(name) {
-            document.documentElement.setAttribute('data-theme', name);
-            localStorage.setItem('theme', name);
-            
-            document.querySelectorAll('.theme-preset').forEach(preset => {
-                preset.classList.remove('active');
-            });
-            document.querySelector(`.theme-preset.${name}`).classList.add('active');
+        // ===== THEME MANAGEMENT =====
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeIcon();
         }
 
-        function changeTheme(theme) {
-            setTheme(theme);
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+
+        function updateThemeIcon() {
+            const themeIcon = document.querySelector('.theme-toggle i');
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
 
         function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'default';
+            const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
         }
 
-        // Image error handler
-        function handleImageError(img) {
-            img.style.display = 'none';
-            img.parentElement.innerHTML = '<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg, var(--accent-1), var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-size:50px;"><i class="fas fa-user"></i></div>';
-        }
-
-        // Calculate age from birthday
-        function calculateAge() {
-            const birthday = new Date(2009, 3, 29);
-            const today = new Date();
-            let age = today.getFullYear() - birthday.getFullYear();
-            const monthDiff = today.getMonth() - birthday.getMonth();
-            
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-                age--;
+        // ===== SCROLL MANAGEMENT =====
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
             }
-            
-            document.getElementById('ageDisplay').textContent = `Age: ${age} years`;
         }
 
-        // Copy to clipboard
+        function handleScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        // ===== CONTACT ACTIONS =====
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast('✓ Copied to clipboard!');
@@ -1096,231 +1451,186 @@
             });
         }
 
-        // Toast notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.display = 'block';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2000);
+        function callNumber(number) {
+            window.open(`tel:${number}`);
         }
 
-        // Modal management
+        function openWhatsApp(number) {
+            window.open(`https://wa.me/${number}`);
+        }
+
+        function sendEmail() {
+            window.open('mailto:mm8551939@gmail.com');
+        }
+
+        function copyAllContacts() {
+            const contacts = `
+Mohamed Ibrahim
+Phone: +20 1145458526
+WhatsApp: 01145458526
+Additional: 01553946710
+Email: mm8551939@gmail.com
+Instagram: just.hamo.2009
+Telegram: @Ma7mee7o
+Discord: just_ma7ame7o
+KWGT: t.me/KWGT2009
+            `.trim();
+            copyToClipboard(contacts);
+        }
+
+        // ===== DOWNLOAD FUNCTIONS =====
         function openDownloadModal() {
-            document.getElementById('downloadModal').style.display = 'flex';
+            document.getElementById('downloadModal').classList.add('show');
         }
 
-        function closeModal() {
-            document.getElementById('downloadModal').style.display = 'none';
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').classList.remove('show');
         }
 
-        function closeQRModal() {
-            document.getElementById('qrModal').style.display = 'none';
-        }
-
-        // Format generation functions
-        function makeVCF(data) {
-            const lines = [
-                "BEGIN:VCARD",
-                "VERSION:3.0",
-                `FN:${data.fullName}`,
-                `NOTE:${data.note}`
-            ];
-            
-            data.phones.forEach(phone => {
-                lines.push(`TEL;TYPE=${phone.type}:${phone.value}`);
-            });
-            
-            data.emails.forEach(email => {
-                lines.push(`EMAIL:${email}`);
-            });
-            
-            data.urls.forEach(url => {
-                lines.push(`URL:${url}`);
-            });
-            
-            if(data.birthday) {
-                lines.push(`BDAY:${data.birthday.replace(/-/g, '')}`);
-            }
-            
-            lines.push("END:VCARD");
-            return new Blob([lines.join("\r\n")], {type: 'text/vcard'});
-        }
-
-        function makeJSON(data) {
-            return new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-        }
-
-        function makeTXT(data) {
-            let txt = `${data.fullName}\n`;
-            txt += `${data.bio}\n\n`;
-            txt += "Contact Information:\n";
-            data.phones.forEach(phone => {
-                txt += `Phone: ${phone.value}\n`;
-            });
-            txt += `Email: ${data.emails[0]}\n\n`;
-            txt += "Social Media:\n";
-            data.urls.forEach(url => {
-                txt += `${url}\n`;
-            });
-            return new Blob([txt], {type: 'text/plain'});
-        }
-
-        // Download functions
         function downloadVCF() {
-            try {
-                const blob = makeVCF(sampleData);
-                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.vcf`);
-                closeModal();
-                showToast('✓ VCF downloaded successfully!');
-            } catch (error) {
-                showToast('❌ Download failed!');
-            }
+            const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Mohamed Ibrahim
+TEL:+201145458526
+TEL:+2001553946710
+EMAIL:mm8551939@gmail.com
+URL:https://www.instagram.com/just.hamo.2009
+URL:https://t.me/Ma7mee7o
+URL:https://discord.com/users/just_ma7ame7o
+URL:https://t.me/KWGT2009
+BDAY:20090429
+NOTE:Web designer & programmer
+END:VCARD`;
+
+            downloadFile(vcardData, 'Mohamed_Ibrahim.vcf', 'text/vcard');
+            closeDownloadModal();
+            showToast('✓ VCF file downloaded!');
         }
 
         function downloadJSON() {
-            try {
-                const blob = makeJSON(sampleData);
-                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.json`);
-                closeModal();
-                showToast('✓ JSON downloaded successfully!');
-            } catch (error) {
-                showToast('❌ Download failed!');
-            }
+            const contactData = {
+                name: "Mohamed Ibrahim",
+                title: "Web designer & programmer",
+                birthday: "2009-04-29",
+                contacts: {
+                    phones: [
+                        "+201145458526",
+                        "01145458526", 
+                        "01553946710",
+                        "01500528737"
+                    ],
+                    email: "mm8551939@gmail.com",
+                    social: {
+                        instagram: "just.hamo.2009",
+                        telegram: "@Ma7mee7o",
+                        discord: "just_ma7ame7o",
+                        kwgt: "KWGT2009"
+                    }
+                }
+            };
+
+            downloadFile(JSON.stringify(contactData, null, 2), 'Mohamed_Ibrahim.json', 'application/json');
+            closeDownloadModal();
+            showToast('✓ JSON file downloaded!');
         }
 
         function downloadPDF() {
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                // Header
-                doc.setFillColor(41, 128, 185);
-                doc.rect(0, 0, 210, 50, 'F');
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(24);
-                doc.text(sampleData.fullName, 20, 30);
-                doc.setFontSize(14);
-                doc.text(sampleData.bio, 20, 40);
-                
-                // Contact Information
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(16);
-                doc.text('Contact Information', 20, 70);
-                
-                doc.setFontSize(12);
-                let y = 85;
-                sampleData.phones.forEach(phone => {
-                    doc.text(`Phone: ${phone.value}`, 20, y);
-                    y += 8;
-                });
-                
-                doc.text(`Email: ${sampleData.emails[0]}`, 20, y);
-                y += 15;
-                
-                // Social Media
-                doc.setFontSize(16);
-                doc.text('Social Media', 20, y);
-                y += 10;
-                
-                doc.setFontSize(12);
-                sampleData.urls.forEach(url => {
-                    doc.text(url, 20, y);
-                    y += 8;
-                });
-                
-                doc.save(`Mohamed_Ibrahim_${getDateString()}.pdf`);
-                closeModal();
-                showToast('✓ PDF downloaded successfully!');
-            } catch (error) {
-                showToast('❌ PDF download failed!');
-            }
+            // Simple PDF generation using browser print
+            window.print();
+            closeDownloadModal();
+            showToast('✓ PDF generated!');
         }
 
-        function downloadTXT() {
-            try {
-                const blob = makeTXT(sampleData);
-                downloadFile(blob, `Mohamed_Ibrahim_${getDateString()}.txt`);
-                closeModal();
-                showToast('✓ TXT downloaded successfully!');
-            } catch (error) {
-                showToast('❌ Download failed!');
-            }
+        function downloadText() {
+            const textData = `
+Mohamed Ibrahim - Contact Information
+=====================================
+
+📞 Phone Numbers:
+• Primary: +20 1145458526
+• WhatsApp: 01145458526
+• Additional: 01553946710
+• Additional: 01500528737
+
+📧 Email:
+• mm8551939@gmail.com
+
+🌐 Social Media:
+• Instagram: just.hamo.2009
+• Telegram: @Ma7mee7o
+• Discord: just_ma7ame7o
+• KWGT: t.me/KWGT2009
+
+🎂 Birthday: 29/4/2009
+💼 Profession: Web designer & programmer
+            `.trim();
+
+            downloadFile(textData, 'Mohamed_Ibrahim.txt', 'text/plain');
+            closeDownloadModal();
+            showToast('✓ Text file downloaded!');
         }
 
-        // QR Code functions
-        function showQRCode() {
-            try {
-                // Clear previous QR code
-                document.getElementById('qrcode').innerHTML = '';
-                
-                const contactUrl = window.location.href;
-                const qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: contactUrl,
-                    width: 200,
-                    height: 200,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-                
-                document.getElementById('downloadModal').style.display = 'none';
-                document.getElementById('qrModal').style.display = 'flex';
-            } catch (error) {
-                showToast('❌ QR Code generation failed!');
-            }
-        }
-
-        function downloadQRCode() {
-            try {
-                const canvas = document.querySelector('#qrcode canvas');
-                if (!canvas) {
-                    showToast('❌ No QR Code available!');
-                    return;
-                }
-                
-                const link = document.createElement('a');
-                link.download = `Mohamed_Ibrahim_QR_${getDateString()}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                showToast('✓ QR Code downloaded!');
-            } catch (error) {
-                showToast('❌ QR Code download failed!');
-            }
-        }
-
-        // Utility functions
-        function getDateString() {
-            const now = new Date();
-            return now.toISOString().split('T')[0].replace(/-/g, '');
-        }
-
-        function downloadFile(blob, fileName) {
+        function downloadFile(content, filename, contentType) {
+            const blob = new Blob([content], { type: contentType });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = fileName;
+            a.download = filename;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
-        // Close modals when clicking outside
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-            }
-        });
+        // ===== TOAST NOTIFICATION =====
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                closeQRModal();
-            }
+        // ===== IMAGE ERROR HANDLING =====
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const container = img.parentElement;
+            container.innerHTML = `
+                <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                    <i class="fas fa-user"></i>
+                </div>
+            `;
+        }
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            window.addEventListener('scroll', handleScroll);
+            
+            // Add animation delays for staggered effects
+            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-left, .animate-slide-right');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('downloadModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeDownloadModal();
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeDownloadModal();
+                }
+                if (e.key === 'd' || e.key === 'D') {
+                    openDownloadModal();
+                }
+            });
         });
     </script>
 </body>
